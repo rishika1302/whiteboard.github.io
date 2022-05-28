@@ -4,12 +4,6 @@
     let iX, iY, fX, fY;
     let drawingMode = false;
 
-    //undo redo
-    let undo = document.querySelector("#undo");
-    let redo = document.querySelector("#redo");
-    let undoRedoTracker = []; //records actions performed on canvas
-    let track = 0; //redo=track++, undo=track--
-
     body.addEventListener("mousedown", function (e) {
         iX = e.clientX - boardLeft
         iY = e.clientY - boardTop
@@ -20,12 +14,6 @@
         }
     })
 
-    undo.addEventListener("click", (e) => {
-
-    })
-    redo.addEventListener("click", (e) => {
-        
-    })
     body.addEventListener("mouseup", function (e) {
         if (cTool == "pencil" || cTool == "eraser") {
             drawingMode = false;
@@ -45,11 +33,6 @@
                 console.log("line tool is pending")
             }
         }
-
-        //undo redo
-        let url = canvasBoard.toDataURL();
-        undoRedoTracker.push(url);
-        track = undoRedoTracker.lenth-1;
     })
     body.addEventListener("mousemove", function (e) {
         if (drawingMode == false)
