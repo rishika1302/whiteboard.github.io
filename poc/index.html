@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+        .fas {
+            font-size: 2rem;
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+
+        .icon-pallet {
+            height: 50px;
+            background-color: rgb(228, 227, 227);
+            width: 800px;
+            margin-left: 100px;
+            /* tools */
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .red {
+            background-color: lightpink;
+            height: 35px;
+            width: 35px;
+            /* curve */
+            border-radius: 50%;
+        }
+
+        .green {
+            background-color: lightgreen;
+            height: 35px;
+            width: 35px;
+            border-radius: 50%
+        }
+
+        .blue {
+            background-color: lightblue;
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- <h1>Canvas example</h1> -->
+    <!-- drawing board -->
+    <div class="icon-pallet">
+        <i class="fas fa-square"></i>
+        <i class="fas fa-grip-lines-vertical"></i>
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+    <canvas></canvas>
+</body>
+<!-- html js inject-->
+<!-- <script>
+    let canvasBoard = document.querySelector("canvas");
+    let rectTool = document.querySelector(".fa-square");
+    let lineTool = document.querySelector(".fa-grip-lines-vertical");
+    let redColor = document.querySelector(".red");
+    let greenColor = document.querySelector(".green");
+    let blueColor = document.querySelector(".blue");
+    let cTool = "rectTool";
+    let body = document.querySelector("body");
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    // canavas board -> left  point kitna aage  hai 
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    let iX, iY, fX, fY;
+    let tool = canvasBoard.getContext("2d");
+    // default height width is smaller 
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+    // alert("mouse was pressed on body");
+    // console.log(e);
+    // let xPos = e.clientX;
+    // let yPos = e.clientY;
+    // console.log(xPos, yPos)
+    // // rectangle build 
+    // tool.fillStyle = "green";
+    // // x,y,width,height
+    // tool.fillRect(10, 30, 200, 200);
+    // // boundaries draw
+    // tool.strokeStyle = "red";
+    // tool.strokeRect(50, 50, 200, 200);
+    // tool.fillStyle = "blue"
+    // tool.fillRect(40, 40, 100, 100);
+    // press on the screen
+    
+    
+    
+</script> -->
+<!-- color change and tool change -->
+<!-- <script>
+    
+    redColor.addEventListener("click", function () {
+        tool.strokeStyle = "lightpink";
+    })
+    greenColor.addEventListener("click", function () {
+        tool.strokeStyle = "lightgreen";
+    })
+    blueColor.addEventListener("click", function () {
+        tool.strokeStyle = "lightblue";
+    })
+    
+    // tool change logic
+    rectTool.addEventListener("click", function () {
+        cTool = "rectTool";
+    })
+    lineTool.addEventListener("click", function () {
+        cTool = "lineTool";
+    })
+    console.log(canvasBoard.getBoundingClientRect());
+    // canavas board -> top point kitna niche hai
+    
+    // alert("mouse was pressed on body");
+</script> -->
+<!-- <script>
+    
+    body.addEventListener("mousedown", function (e) {
+        iX = e.clientX + boardLeft;
+        iY = e.clientY - boardTop;
+    })
+    body.addEventListener("mouseup",
+    function (e) {
+        // console.log(e);
+        fX = e.clientX + boardLeft;;
+        fY = e.clientY - boardTop;
+        let width = fX - iX;
+        let height = fY - iY;
+        if (cTool == "rectTool") {
+            tool.strokeRect(iX, iY, width, height);
+        } else {
+            tool.beginPath();
+            tool.moveTo(iX, iY);
+            tool.lineTo(fX, fY);
+            tool.stroke();
+            console.log("line tool is pending")
+        }
+    })
+    
+</script> -->
+
+<script>
+    let canvasBoard = document.querySelector("canvas");
+    let tool = canvasBoard.getContext("2d");
+    let body = document.querySelector("body");
+    canvasBoard.height = window.innerHeight;
+    canvasBoard.width = window.innerWidth;
+    let boardTop = canvasBoard.getBoundingClientRect().top;
+    // canavas board -> left  point kitna aage  hai 
+    let boardLeft = canvasBoard.getBoundingClientRect().left;
+    let iX, iY, fX, fY;
+    let drawingMode = false;
+    body.addEventListener("mousedown", function (e) {
+        drawingMode = true;
+        tool.beginPath();
+        iX = e.clientX - boardLeft
+        iY=e.clientY - boardTop
+        tool.moveTo(iX, iY);
+    })
+    body.addEventListener("mouseup", function (e) {
+        drawingMode = false;
+    })
+    body.addEventListener("mousemove", function (e) {
+        if (drawingMode == false)
+            return;
+        fX = e.clientX - boardLeft;
+        fY = e.clientY - boardTop;
+        tool.lineTo(fX, fY);
+        tool.stroke();
+        iX = fX;
+        iY = fY;
+    })
+
+</script>
+</html>

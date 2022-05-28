@@ -4,6 +4,12 @@
     let iX, iY, fX, fY;
     let drawingMode = false;
 
+    //undo redo
+    // let undo = document.querySelector("#undo");
+    // let redo = document.querySelector("#redo");
+    // let undoRedoTracker = []; //records actions performed on canvas
+    // let track = 0; //redo=track++, undo=track--
+
     body.addEventListener("mousedown", function (e) {
         iX = e.clientX - boardLeft
         iY = e.clientY - boardTop
@@ -13,6 +19,36 @@
             tool.moveTo(iX, iY);
         }
     })
+
+    // undo.addEventListener("click", (e) => {
+    //     if(track > 0) track--; //invalid if we reach -1 index on array
+    //     // //track action
+    //     let trackObj = {
+    //         trackValue: track,
+    //         undoRedoTracker
+    //     }
+    //     undoRedoCanvas(trackObj);
+    // })
+    // redo.addEventListener("click", (e) => {
+    //     if(track < undoRedoTracker.length-1) track++; //invalid, exceeds array length
+    //     // //track action
+    //     let trackObj = {
+    //         trackValue: track,
+    //         undoRedoTracker
+    //     }
+    //     undoRedoCanvas(trackObj);
+    // })
+    // function undoRedoCanvas(trackObj){
+    //     track = trackObj.trackValue;
+    //     undoRedoTracker = trackObj.undoRedoTracker;
+
+    //     let url = undoRedoTracker[track];
+    //     let img = new Image(); //new image reference element
+    //     img.src = url;
+    //     img.onload = (e) => {
+    //         tool.drawImage(img, 0, 0, canvasBoard.width, canvasBoard.height);
+    //     }
+    // }
 
     body.addEventListener("mouseup", function (e) {
         if (cTool == "pencil" || cTool == "eraser") {
@@ -33,6 +69,11 @@
                 console.log("line tool is pending")
             }
         }
+
+        //undo redo
+        // let url = canvasBoard.toDataURL();
+        // undoRedoTracker.push(url);
+        // track = undoRedoTracker.length-1;
     })
     body.addEventListener("mousemove", function (e) {
         if (drawingMode == false)
